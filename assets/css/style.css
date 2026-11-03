@@ -36,6 +36,10 @@
   --mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
   --measure: 43rem;
+
+  /* How tall the projects pane grows before it starts scrolling. Raise it for
+     fewer visible rows, lower it for more; `none` disables scrolling entirely. */
+  --table-max-height: 26rem;
 }
 
 /* Follow the system until the visitor picks a theme in the header. */
@@ -406,6 +410,66 @@ strong {
   font-size: 0.86rem;
 }
 
+/* Projects pane: the table keeps its own height and scrolls inside it, so the
+   list can grow without pushing the application instructions off screen.
+   The wrapper is added by the script in _layouts/default.html; without
+   JavaScript the table simply renders at full height. */
+
+.table-scroll {
+  /* `direction: rtl` moves the scrollbar to the left edge; the table below
+     switches back to LTR, so only the bar changes side. */
+  direction: rtl;
+  max-height: var(--table-max-height, 26rem);
+  margin: 0 0 2.4rem;
+  overflow-y: auto;
+}
+
+/* Quiet by design: a thin, faint thumb on a transparent track — no arrows, no
+   track fill — that only firms up while the pointer is over the list. */
+.table-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--rule);
+  border-radius: 999px;
+}
+
+.table-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: var(--faint);
+}
+
+/* Firefox has no ::-webkit- scrollbars; these only apply there. */
+@supports (-moz-appearance: none) {
+  .table-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule) transparent;
+  }
+
+  .table-scroll:hover {
+    scrollbar-color: var(--faint) transparent;
+  }
+}
+
+.table-scroll > table {
+  direction: ltr;
+  margin-bottom: 0;
+}
+
+.table-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--paper);
+  /* Collapsed table borders scroll away with the body, so the header rules are
+     painted onto the sticky cells instead. */
+  box-shadow: inset 0 1px 0 var(--ink), inset 0 -1px 0 var(--ink);
+}
+
 .status {
   display: inline-flex;
   align-items: center;
@@ -565,6 +629,13 @@ strong {
     margin-top: 2.8rem;
   }
 
+  /* No inner scrolling on phones: the table becomes a list and the page scrolls. */
+  .table-scroll {
+    direction: ltr;
+    max-height: none;
+    overflow: visible;
+  }
+
   /* Four-column project table becomes a compact list. */
   .prose table:has(tbody tr td:nth-child(4)) {
     display: block;
@@ -684,6 +755,21 @@ strong {
   .prose table,
   .prose blockquote {
     break-inside: avoid;
+  }
+
+  /* Scrolling does not exist on paper: print the whole table. */
+  .table-scroll {
+    direction: ltr;
+    max-height: none;
+    overflow: visible;
+    /* The script offsets the pane by the live scrollbar width; on paper there
+       is no scrollbar, so the offset must go too. */
+    margin-left: 0 !important;
+  }
+
+  .table-scroll thead th {
+    position: static;
+    box-shadow: none;
   }
 
   a {
