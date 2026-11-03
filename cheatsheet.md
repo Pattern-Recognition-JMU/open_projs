@@ -164,7 +164,7 @@ GitHub Pages rebuilds automatically in about a minute.
 `_config.yml` contains:
 
 ```yaml
-url: "https://pattern-recognition-jmu-test.github.io"
+url: "https://pattern-recognition-jmu.github.io"
 baseurl: "/open_projs"
 ```
 
