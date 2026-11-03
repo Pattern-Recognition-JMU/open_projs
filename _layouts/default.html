@@ -98,5 +98,50 @@
       refreshLabel();
     })();
   </script>
+
+  <script>
+    // Long tables (the project list) scroll inside their own pane, with the
+    // header pinned. Wrapping in JS keeps the Markdown a plain table, so the
+    // list still works when JavaScript is off — it just grows the page instead.
+    (function () {
+      var tables = document.querySelectorAll(".prose table");
+
+      Array.prototype.forEach.call(tables, function (table) {
+        if (table.parentNode && table.parentNode.classList.contains("table-scroll")) return;
+
+        // Phones turn a four-column table into a list of cards. Marking it here
+        // keeps that layout working in browsers without :has() support, where
+        // the CSS alone would fall back to a table too wide for the screen.
+        var firstRow = table.querySelector("tbody tr");
+        if (firstRow && firstRow.children.length === 4) table.classList.add("table--list");
+
+        var pane = document.createElement("div");
+        pane.className = "table-scroll";
+        table.parentNode.insertBefore(pane, table);
+        pane.appendChild(table);
+
+        // The scrollbar sits on the left and would push the table right; pull
+        // the pane back by exactly the bar width so the table stays flush with
+        // the heading and keeps its width. Zero on overlay-scrollbar systems,
+        // and nothing at all on phones, where the pane does not scroll.
+        function fit() {
+          var bar;
+
+          pane.style.marginLeft = "";
+          pane.removeAttribute("tabindex");
+
+          if (pane.scrollHeight <= pane.clientHeight + 1) return;
+
+          bar = pane.offsetWidth - pane.clientWidth;
+          pane.tabIndex = 0; // keyboard users can scroll it once it is a pane
+          if (bar > 0) pane.style.marginLeft = "-" + bar + "px";
+        }
+
+        fit();
+        window.addEventListener("load", fit);
+        window.addEventListener("resize", fit);
+      });
+    })();
+  </script>
 </body>
 </html>

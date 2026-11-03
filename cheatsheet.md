@@ -60,6 +60,27 @@ Below the table there is one line explaining the codes:
 
 If you introduce a new code (e.g. `MA`), add it here too.
 
+### The project list scrolls in a fixed-height pane
+
+When the list gets long, the table stops growing and scrolls inside a box
+(`--table-max-height: 26rem`, about six rows), with the header row pinned at
+the top. The page length therefore stays constant however many projects you add.
+
+- The scrollbar sits on the **left** edge and is deliberately quiet: a thin,
+  faint thumb without arrows or track fill, which darkens a step while the
+  pointer is over the list. Its colours are the `--rule` / `--faint` variables.
+- The scroll pane is added by the script at the bottom of `_layouts/default.html`;
+  the Markdown stays a plain table, so with JavaScript off the table simply
+  renders at full height.
+- Change the height in `assets/css/style.css`:
+
+  ```css
+  --table-max-height: 26rem;  /* raise = more rows before scrolling */
+  --table-max-height: none;   /* turn the pane off: the table grows the page */
+  ```
+
+- Phones (≤ 640px) and print always show the full table; only wider screens scroll.
+
 ---
 
 ## 2. Changing page text
