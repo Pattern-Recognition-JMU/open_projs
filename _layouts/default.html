@@ -109,6 +109,12 @@
       Array.prototype.forEach.call(tables, function (table) {
         if (table.parentNode && table.parentNode.classList.contains("table-scroll")) return;
 
+        // Phones turn a four-column table into a list of cards. Marking it here
+        // keeps that layout working in browsers without :has() support, where
+        // the CSS alone would fall back to a table too wide for the screen.
+        var firstRow = table.querySelector("tbody tr");
+        if (firstRow && firstRow.children.length === 4) table.classList.add("table--list");
+
         var pane = document.createElement("div");
         pane.className = "table-scroll";
         table.parentNode.insertBefore(pane, table);
