@@ -13,19 +13,20 @@ The list here is updated on a rolling basis.
 |:--:|---|---|:--|
 | P | Benchmarking and adaptation (optional) of VLMs for medical tasks | <span class="status status--open">Open</span> | KI Proj 1/2 · 10 ECTS |
 | P | Multimodal (agentic) AI for reasoning-guided pathology report generation from whole-slide images | <span class="status status--open">Open</span> | KI Proj 1/2 · 10 ECTS |
-| P/BA | ~~Diffusion-Model based pelvic ultrasound inpainting~~ | <span class="status status--taken">Taken</span> | — |
 | P | Self-supervised Learning for Cross-Modal Ovary Segmentation | <span class="status status--open">Open</span> | (Advanced) Deep Learning passed as preferred |
 | P | Towards geometrically grounded evaluation of pCLE mosaicing | <span class="status status--open">Open</span> | Need Java |
 | BA | ~~Agentic LLMs in digital pathology~~ | <span class="status status--taken">Taken</span> | — |
 | P | ~~Pelvic MRI Super Resolution~~ | <span class="status status--taken">Taken</span> | For master student only|
 | P | ~~Domain Adaptation for Muscle Segmentation in Leg Ultrasound~~ | <span class="status status--taken">Taken</span> | — |
 | BA | ~~Ultrasound-guided motion correction for quantitative photoacoustic imaging~~ | <span class="status status--taken">Taken</span> | — |
+| P/BA | ~~Diffusion-Model based pelvic ultrasound inpainting~~ | <span class="status status--taken">Taken</span> | — |
 
 <p class="project-types"><strong>BA</strong> Bachelor's thesis, 10 ECTS · <strong>MA</strong> Master's thesis, 30 ECTS · <strong>P</strong> Student project, 5 / 10 ECTS · <strong>HiWi</strong> Student assistant</p>
 
 ## How to Apply 📋
 
-If you are interested in one of the topics above, please send your application by email to
+If you are interested in one of the topics above, please send your application by email to:
+
 **[caidas-pr-student-projects@uni-wuerzburg.de](mailto:caidas-pr-student-projects@uni-wuerzburg.de)**.
 
 Please kindly include the following in your email:
